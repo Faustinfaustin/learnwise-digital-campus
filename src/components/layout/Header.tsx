@@ -30,8 +30,14 @@ const Header = () => {
           <Link to="/pricing" className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100">
             Pricing
           </Link>
+          <Link to="/testimonials" className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100">
+            Testimonials
+          </Link>
           <Link to="/about" className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100">
             About
+          </Link>
+          <Link to="/contact" className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100">
+            Contact
           </Link>
         </nav>
 
@@ -97,11 +103,25 @@ const Header = () => {
                 Pricing
               </Link>
               <Link
+                to="/testimonials"
+                className="px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Testimonials
+              </Link>
+              <Link
                 to="/about"
                 className="px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
+              </Link>
+              <Link
+                to="/contact"
+                className="px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
               </Link>
 
               <div className="pt-2 border-t border-gray-200">

@@ -2,7 +2,9 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Star } from "lucide-react";
+import { Star, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
@@ -45,7 +47,7 @@ const TestimonialsSection = () => {
         
         <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
           {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="h-full">
+            <Card key={testimonial.id} className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <CardContent className="p-6">
                 <div className="flex mb-4">
                   {[...Array(5)].map((_, i) => (
@@ -75,6 +77,15 @@ const TestimonialsSection = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        <div className="mt-10 text-center">
+          <Button variant="outline" asChild className="group">
+            <Link to="/testimonials">
+              View all success stories 
+              <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

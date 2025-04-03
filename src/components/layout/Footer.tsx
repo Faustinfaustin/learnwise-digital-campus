@@ -53,7 +53,7 @@ const Footer = () => {
               <li><Link to="/courses/cybersecurity" className="text-sm text-gray-600 hover:text-learnwise-600">Cybersecurity</Link></li>
               <li><Link to="/courses/machine-learning" className="text-sm text-gray-600 hover:text-learnwise-600">Machine Learning</Link></li>
               <li><Link to="/courses/data-analysis" className="text-sm text-gray-600 hover:text-learnwise-600">Data Analysis</Link></li>
-              <li><Link to="/courses/all" className="text-sm text-gray-600 hover:text-learnwise-600">View All Courses</Link></li>
+              <li><Link to="/courses" className="text-sm text-gray-600 hover:text-learnwise-600">View All Courses</Link></li>
             </ul>
           </div>
 
@@ -61,8 +61,8 @@ const Footer = () => {
             <h3 className="text-sm font-semibold tracking-wider text-gray-900 uppercase">Company</h3>
             <ul className="mt-4 space-y-2">
               <li><Link to="/about" className="text-sm text-gray-600 hover:text-learnwise-600">About Us</Link></li>
+              <li><Link to="/testimonials" className="text-sm text-gray-600 hover:text-learnwise-600">Success Stories</Link></li>
               <li><Link to="/instructors" className="text-sm text-gray-600 hover:text-learnwise-600">Our Instructors</Link></li>
-              <li><Link to="/careers" className="text-sm text-gray-600 hover:text-learnwise-600">Careers</Link></li>
               <li><Link to="/contact" className="text-sm text-gray-600 hover:text-learnwise-600">Contact</Link></li>
             </ul>
           </div>

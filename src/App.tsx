@@ -15,6 +15,8 @@ import Enroll from "./pages/Enroll";
 import Categories from "./pages/Categories";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Testimonials from "./pages/Testimonials";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,8 @@ const App = () => (
           <Route path="/categories" element={<Categories />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/testimonials" element={<Testimonials />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
