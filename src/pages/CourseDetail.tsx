@@ -1,10 +1,10 @@
 
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, BookOpen, Award, Star, Users, Check } from "lucide-react";
 
@@ -245,9 +245,13 @@ const CourseDetail = () => {
                       )}
                     </div>
                     
-                    <Button className="w-full mb-3 bg-learnwise-600 hover:bg-learnwise-700">
-                      Enroll Now
+                    <Button 
+                      className="w-full mb-3 bg-learnwise-600 hover:bg-learnwise-700"
+                      asChild
+                    >
+                      <Link to={`/enroll/${course.id}`}>Enroll Now</Link>
                     </Button>
+                    
                     <Button className="w-full" variant="outline">
                       Add to Wishlist
                     </Button>
