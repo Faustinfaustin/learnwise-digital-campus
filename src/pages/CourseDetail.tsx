@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, BookOpen, Award, Star, Users, Check } from "lucide-react";
+import { Clock, BookOpen, Award, Star, Users, Check, MessageSquare } from "lucide-react";
 
 // Sample course data - in a real app, this would come from an API
 const courseData = {
@@ -125,10 +125,11 @@ const CourseDetail = () => {
               {/* Course tabs */}
               <div className="mt-8">
                 <Tabs defaultValue="overview">
-                  <TabsList className="grid w-full grid-cols-3">
+                  <TabsList className="grid w-full grid-cols-4">
                     <TabsTrigger value="overview">Overview</TabsTrigger>
                     <TabsTrigger value="curriculum">Curriculum</TabsTrigger>
                     <TabsTrigger value="instructor">Instructor</TabsTrigger>
+                    <TabsTrigger value="forum">Forum</TabsTrigger>
                   </TabsList>
                   
                   {/* Overview tab */}
@@ -210,6 +211,53 @@ const CourseDetail = () => {
                     </div>
                     <div className="mt-4">
                       <p className="text-gray-700">{course.instructor.bio}</p>
+                    </div>
+                  </TabsContent>
+
+                  {/* Forum tab */}
+                  <TabsContent value="forum" className="pt-4">
+                    <Card>
+                      <CardContent className="flex flex-col items-center p-8 text-center">
+                        <MessageSquare className="h-12 w-12 text-learnwise-600" />
+                        <h3 className="mt-4 text-xl font-semibold">Course Discussion Forum</h3>
+                        <p className="mt-2 text-gray-600 max-w-md">
+                          Join the conversation! Connect with fellow students, ask questions, and discuss course topics with your instructor.
+                        </p>
+                        <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                          <Button asChild>
+                            <Link to={`/forum/course/${course.id}`}>View Discussions</Link>
+                          </Button>
+                          <Button variant="outline" asChild>
+                            <Link to={`/forum/course/${course.id}?new=true`}>Start New Topic</Link>
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <div className="mt-6">
+                      <h3 className="text-lg font-semibold mb-4">Upcoming Q&A Sessions</h3>
+                      <Card>
+                        <CardContent className="p-4">
+                          <div className="flex flex-col md:flex-row justify-between items-start">
+                            <div>
+                              <h4 className="font-medium">Cybersecurity Career Paths Q&A</h4>
+                              <p className="text-sm text-gray-500 mt-1">with Dr. Alex Johnson</p>
+                              <div className="flex items-center mt-2 text-sm">
+                                <Calendar className="h-3.5 w-3.5 mr-1" />
+                                <span>April 15, 2025</span>
+                                <span className="mx-2">•</span>
+                                <Clock className="h-3.5 w-3.5 mr-1" />
+                                <span>14:00 - 15:30</span>
+                              </div>
+                            </div>
+                            <Button size="sm" className="mt-4 md:mt-0" asChild>
+                              <Link to={`/forum/course/${course.id}?tab=qa`}>
+                                Join Session
+                              </Link>
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
                     </div>
                   </TabsContent>
                 </Tabs>

@@ -17,6 +17,8 @@ import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Testimonials from "./pages/Testimonials";
+import Forum from "./pages/Forum";
+import CourseDiscussion from "./pages/CourseDiscussion";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +41,8 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/forum" element={<Forum />} />
+          <Route path="/forum/course/:id" element={<CourseDiscussion />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
