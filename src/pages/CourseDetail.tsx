@@ -1,326 +1,191 @@
-
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, BookOpen, Award, Star, Users, Check, MessageSquare } from "lucide-react";
-
-// Sample course data - in a real app, this would come from an API
-const courseData = {
-  id: "1",
-  title: "Complete Ethical Hacking Bootcamp 2023",
-  description: "Master the art of ethical hacking and cybersecurity with this comprehensive course designed for security professionals. Learn how to identify vulnerabilities, conduct security assessments, and implement effective defense strategies.",
-  instructor: {
-    name: "Dr. Alex Johnson",
-    bio: "Security expert with 15+ years experience in penetration testing and security consulting for Fortune 500 companies.",
-    image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-  },
-  rating: 4.8,
-  ratingCount: 1243,
-  studentsEnrolled: 12568,
-  price: 89.99,
-  discountPrice: 49.99,
-  image: "https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80",
-  category: "Cybersecurity",
-  level: "Intermediate",
-  duration: "24 hours",
-  lectures: 42,
-  updatedDate: "November 2023",
-  language: "English",
-  whatYouWillLearn: [
-    "Understand the fundamentals of network security and encryption",
-    "Master essential penetration testing techniques",
-    "Perform reconnaissance and vulnerability assessment",
-    "Exploit web application vulnerabilities safely",
-    "Set up secure defensive measures for your organization",
-    "Create detailed security reports and documentation",
-  ],
-  curriculum: [
-    {
-      title: "Introduction to Ethical Hacking",
-      lectures: 5,
-      duration: "2h 30m",
-      topics: ["Course Overview", "Ethical Hacking Methodology", "Legal Framework", "Setting up your Lab Environment", "Essential Tools"],
-    },
-    {
-      title: "Reconnaissance and Footprinting",
-      lectures: 8,
-      duration: "3h 45m",
-      topics: ["Passive Reconnaissance Techniques", "Active Information Gathering", "Social Engineering Basics", "OSINT Tools and Methods"],
-    },
-    {
-      title: "Scanning and Enumeration",
-      lectures: 7,
-      duration: "4h 15m",
-      topics: ["Port Scanning with Nmap", "Vulnerability Scanning", "Service Enumeration", "Banner Grabbing", "Scanning Countermeasures"],
-    },
-    {
-      title: "Exploitation Techniques",
-      lectures: 10,
-      duration: "6h 20m",
-      topics: ["Introduction to Metasploit", "Web Application Attacks", "Password Cracking", "Privilege Escalation", "Maintaining Access"],
-    },
-    {
-      title: "Defensive Security",
-      lectures: 7,
-      duration: "4h 10m",
-      topics: ["Security Architecture Fundamentals", "Firewall Configuration", "Intrusion Detection Systems", "Incident Response"],
-    },
-    {
-      title: "Security Assessment and Reporting",
-      lectures: 5,
-      duration: "3h 00m",
-      topics: ["Report Writing", "Risk Assessment", "Remediation Planning", "Communicating with Stakeholders"],
-    },
-  ],
-};
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
+import { Calendar, Clock, Star, PlayCircle, Users, MessageSquare } from "lucide-react";
 
 const CourseDetail = () => {
   const { id } = useParams<{ id: string }>();
-  // In a real app, we'd fetch course data based on the ID
-  const course = courseData;
+
+  // Dummy course data
+  const course = {
+    id: "1",
+    title: "Complete Ethical Hacking Bootcamp 2023",
+    instructor: "Dr. Alex Johnson",
+    rating: 4.8,
+    ratingCount: 1243,
+    modules: [
+      { title: "Introduction to Ethical Hacking", duration: "1h 30m" },
+      { title: "Setting up a Lab Environment", duration: "2h" },
+      { title: "Footprinting and Reconnaissance", duration: "2h 30m" },
+      { title: "Scanning Networks", duration: "1h 45m" },
+      { title: "Enumeration", duration: "2h 15m" },
+      { title: "Vulnerability Analysis", duration: "2h 45m" },
+      { title: "Exploitation", duration: "3h" },
+      { title: "Post-Exploitation", duration: "2h 30m" },
+      { title: "Web Application Hacking", duration: "3h 15m" },
+      { title: "Wireless Hacking", duration: "2h" },
+      { title: "Mobile Hacking", duration: "2h 30m" },
+      { title: "Cloud Security", duration: "2h 45m" },
+      { title: "Cryptography", duration: "1h 30m" },
+      { title: "Social Engineering", duration: "2h" },
+      { title: "Reporting and Documentation", duration: "1h 45m" },
+    ],
+    progress: 75,
+    description:
+      "Learn ethical hacking from scratch and become a certified professional. This course covers the latest tools and techniques used by ethical hackers in 2023.",
+    instructorImage: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    students: 5478,
+  };
+
+  if (!course) {
+    return (
+      <Layout>
+        <div className="container py-12 text-center">
+          <h2 className="text-2xl font-bold">Course not found</h2>
+          <Button asChild className="mt-4">
+            <Link to="/courses">Back to Courses</Link>
+          </Button>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
-      <div className="py-6">
+      <div className="py-10 bg-gray-50">
         <div className="container px-4 mx-auto">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-            {/* Main content */}
-            <div className="lg:col-span-2">
-              {/* Course header */}
+          {/* Course Header */}
+          <Card className="mb-8">
+            <CardHeader className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
               <div>
-                <Badge className="mb-2">{course.category}</Badge>
-                <h1 className="text-2xl font-bold md:text-3xl">{course.title}</h1>
-                <p className="mt-3 text-gray-700">{course.description}</p>
-              </div>
-
-              {/* Course stats */}
-              <div className="flex flex-wrap gap-4 my-6">
-                <div className="flex items-center">
-                  <Star className="w-4 h-4 mr-1 text-yellow-500 fill-yellow-500" />
-                  <span className="font-medium">{course.rating}</span>
-                  <span className="ml-1 text-gray-500">({course.ratingCount} ratings)</span>
-                </div>
-                <div className="flex items-center">
-                  <Users className="w-4 h-4 mr-1 text-gray-500" />
-                  <span>{course.studentsEnrolled.toLocaleString()} students</span>
-                </div>
-                <div className="flex items-center">
-                  <Clock className="w-4 h-4 mr-1 text-gray-500" />
-                  <span>{course.duration}</span>
-                </div>
-                <div className="flex items-center">
-                  <BookOpen className="w-4 h-4 mr-1 text-gray-500" />
-                  <span>{course.lectures} lectures</span>
-                </div>
-                <div className="flex items-center">
-                  <Award className="w-4 h-4 mr-1 text-gray-500" />
-                  <span>{course.level}</span>
+                <CardTitle className="text-2xl font-bold">{course.title}</CardTitle>
+                <div className="flex items-center mt-2">
+                  <Avatar className="h-6 w-6 mr-2">
+                    <AvatarImage src={course.instructorImage} alt={course.instructor} />
+                    <AvatarFallback>{course.instructor.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                  <span className="text-gray-700">{course.instructor}</span>
+                  <span className="ml-2 text-gray-400">|</span>
+                  <div className="flex items-center ml-2">
+                    <Star className="h-4 w-4 text-yellow-500 fill-yellow-500 mr-1" />
+                    <span className="text-gray-700">{course.rating}</span>
+                    <span className="text-gray-500 ml-1">({course.ratingCount} ratings)</span>
+                  </div>
                 </div>
               </div>
+              <Button>Enroll Now</Button>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">{course.description}</p>
+              <div className="mt-4">
+                <div className="flex items-center justify-between">
+                  <div className="text-sm font-medium">Course Progress</div>
+                  <div className="text-sm text-gray-500">{course.progress}%</div>
+                </div>
+                <Progress value={course.progress} className="mt-2" />
+              </div>
+              <div className="mt-4 flex items-center space-x-4">
+                <div className="flex items-center">
+                  <PlayCircle className="h-5 w-5 mr-2 text-gray-500" />
+                  <span className="text-sm text-gray-700">{course.modules.length} Modules</span>
+                </div>
+                <div className="flex items-center">
+                  <Users className="h-5 w-5 mr-2 text-gray-500" />
+                  <span className="text-sm text-gray-700">{course.students}+ Students</span>
+                </div>
+                <div className="flex items-center">
+                  <MessageSquare className="h-5 w-5 mr-2 text-gray-500" />
+                  <Link to="/forum" className="text-sm text-learnwise-600 hover:underline">
+                    Discussion Forum
+                  </Link>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-              {/* Course tabs */}
-              <div className="mt-8">
-                <Tabs defaultValue="overview">
-                  <TabsList className="grid w-full grid-cols-4">
-                    <TabsTrigger value="overview">Overview</TabsTrigger>
-                    <TabsTrigger value="curriculum">Curriculum</TabsTrigger>
-                    <TabsTrigger value="instructor">Instructor</TabsTrigger>
-                    <TabsTrigger value="forum">Forum</TabsTrigger>
-                  </TabsList>
-                  
-                  {/* Overview tab */}
-                  <TabsContent value="overview" className="pt-4">
-                    <div className="mb-8">
-                      <h3 className="text-xl font-semibold">What You'll Learn</h3>
-                      <div className="grid grid-cols-1 gap-3 mt-4 md:grid-cols-2">
-                        {course.whatYouWillLearn.map((item, index) => (
-                          <div key={index} className="flex">
-                            <Check className="flex-shrink-0 w-5 h-5 mt-0.5 text-learnwise-600" />
-                            <span className="ml-2">{item}</span>
-                          </div>
-                        ))}
+          {/* Course Content and Details */}
+          <Tabs defaultValue="modules">
+            <TabsList className="w-full">
+              <TabsTrigger value="modules">Course Modules</TabsTrigger>
+              <TabsTrigger value="details">Course Details</TabsTrigger>
+            </TabsList>
+            <TabsContent value="modules" className="mt-6">
+              <ul className="space-y-4">
+                {course.modules.map((module, index) => (
+                  <li key={index} className="border rounded-md p-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <span className="mr-3 font-semibold">{index + 1}.</span>
+                        <span>{module.title}</span>
+                      </div>
+                      <div className="text-gray-500">
+                        <Clock className="inline-block h-4 w-4 mr-1" />
+                        {module.duration}
                       </div>
                     </div>
+                  </li>
+                ))}
+              </ul>
+            </TabsContent>
+            <TabsContent value="details" className="mt-6">
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold">Course Description</h3>
+                  <p className="text-gray-700">{course.description}</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold">Instructor</h3>
+                  <div className="flex items-center mt-2">
+                    <Avatar className="h-10 w-10 mr-4">
+                      <AvatarImage src={course.instructorImage} alt={course.instructor} />
+                      <AvatarFallback>{course.instructor.charAt(0)}</AvatarFallback>
+                    </Avatar>
                     <div>
-                      <h3 className="text-xl font-semibold">Course Details</h3>
-                      <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2">
-                        <div>
-                          <h4 className="text-sm font-medium text-gray-500">Last Updated</h4>
-                          <p>{course.updatedDate}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-medium text-gray-500">Language</h4>
-                          <p>{course.language}</p>
-                        </div>
-                      </div>
+                      <div className="font-medium">{course.instructor}</div>
+                      <div className="text-sm text-gray-500">Expert in Ethical Hacking</div>
                     </div>
-                  </TabsContent>
-                  
-                  {/* Curriculum tab */}
-                  <TabsContent value="curriculum" className="pt-4">
-                    <h3 className="text-xl font-semibold">Course Content</h3>
-                    <div className="mt-4 text-sm text-gray-600">
-                      {course.lectures} lectures • {course.duration} total length
-                    </div>
-                    
-                    <div className="mt-6 space-y-4">
-                      {course.curriculum.map((section, index) => (
-                        <Card key={index}>
-                          <CardContent className="p-4">
-                            <div className="flex justify-between">
-                              <div>
-                                <h4 className="font-semibold">
-                                  {index + 1}. {section.title}
-                                </h4>
-                                <p className="mt-1 text-sm text-gray-500">
-                                  {section.lectures} lectures • {section.duration}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="mt-4 pl-4 border-l-2 border-gray-100">
-                              <ul className="space-y-2">
-                                {section.topics.map((topic, topicIndex) => (
-                                  <li key={topicIndex} className="text-gray-700">
-                                    {topic}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  </TabsContent>
-                  
-                  {/* Instructor tab */}
-                  <TabsContent value="instructor" className="pt-4">
-                    <div className="flex items-center">
-                      <img
-                        src={course.instructor.image}
-                        alt={course.instructor.name}
-                        className="object-cover w-20 h-20 rounded-full"
-                      />
-                      <div className="ml-4">
-                        <h3 className="text-xl font-semibold">{course.instructor.name}</h3>
-                        <p className="text-gray-600">{course.category} Instructor</p>
-                      </div>
-                    </div>
-                    <div className="mt-4">
-                      <p className="text-gray-700">{course.instructor.bio}</p>
-                    </div>
-                  </TabsContent>
-
-                  {/* Forum tab */}
-                  <TabsContent value="forum" className="pt-4">
-                    <Card>
-                      <CardContent className="flex flex-col items-center p-8 text-center">
-                        <MessageSquare className="h-12 w-12 text-learnwise-600" />
-                        <h3 className="mt-4 text-xl font-semibold">Course Discussion Forum</h3>
-                        <p className="mt-2 text-gray-600 max-w-md">
-                          Join the conversation! Connect with fellow students, ask questions, and discuss course topics with your instructor.
-                        </p>
-                        <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                          <Button asChild>
-                            <Link to={`/forum/course/${course.id}`}>View Discussions</Link>
-                          </Button>
-                          <Button variant="outline" asChild>
-                            <Link to={`/forum/course/${course.id}?new=true`}>Start New Topic</Link>
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <div className="mt-6">
-                      <h3 className="text-lg font-semibold mb-4">Upcoming Q&A Sessions</h3>
-                      <Card>
-                        <CardContent className="p-4">
-                          <div className="flex flex-col md:flex-row justify-between items-start">
-                            <div>
-                              <h4 className="font-medium">Cybersecurity Career Paths Q&A</h4>
-                              <p className="text-sm text-gray-500 mt-1">with Dr. Alex Johnson</p>
-                              <div className="flex items-center mt-2 text-sm">
-                                <Calendar className="h-3.5 w-3.5 mr-1" />
-                                <span>April 15, 2025</span>
-                                <span className="mx-2">•</span>
-                                <Clock className="h-3.5 w-3.5 mr-1" />
-                                <span>14:00 - 15:30</span>
-                              </div>
-                            </div>
-                            <Button size="sm" className="mt-4 md:mt-0" asChild>
-                              <Link to={`/forum/course/${course.id}?tab=qa`}>
-                                Join Session
-                              </Link>
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </TabsContent>
-                </Tabs>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold">What you'll learn</h3>
+                  <ul className="list-disc list-inside text-gray-700">
+                    <li>Understand the core principles of ethical hacking</li>
+                    <li>Learn to set up a secure lab environment</li>
+                    <li>Master footprinting and reconnaissance techniques</li>
+                    <li>Perform vulnerability analysis and exploitation</li>
+                    <li>Secure web applications and wireless networks</li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            
-            {/* Course enrollment card */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-24">
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="aspect-video mb-4 overflow-hidden rounded-lg">
-                      <img 
-                        src={course.image} 
-                        alt={course.title} 
-                        className="object-cover w-full h-full" 
-                      />
-                    </div>
-                    <div className="flex items-center mb-4">
-                      {course.discountPrice !== undefined ? (
-                        <div className="flex items-center">
-                          <span className="text-2xl font-bold text-learnwise-700">
-                            ${course.discountPrice}
-                          </span>
-                          <span className="ml-2 text-lg text-gray-500 line-through">
-                            ${course.price}
-                          </span>
-                        </div>
-                      ) : (
-                        <span className="text-2xl font-bold text-learnwise-700">
-                          ${course.price}
-                        </span>
-                      )}
-                    </div>
-                    
-                    <Button 
-                      className="w-full mb-3 bg-learnwise-600 hover:bg-learnwise-700"
-                      asChild
-                    >
-                      <Link to={`/enroll/${course.id}`}>Enroll Now</Link>
+            </TabsContent>
+          </Tabs>
+
+          {/* Related Courses */}
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold mb-6">Related Courses</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Dummy related courses */}
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="hover:shadow-md transition-shadow">
+                  <CardHeader>
+                    <CardTitle>Related Course {i}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                    <Button variant="link" className="mt-4">
+                      Learn More
                     </Button>
-                    
-                    <Button className="w-full" variant="outline">
-                      Add to Wishlist
-                    </Button>
-                    
-                    <div className="mt-6 pt-6 border-t border-gray-200 space-y-4 text-sm">
-                      <div className="flex">
-                        <Check className="flex-shrink-0 w-4 h-4 mt-0.5 text-learnwise-600" />
-                        <span className="ml-2">30-day money-back guarantee</span>
-                      </div>
-                      <div className="flex">
-                        <Check className="flex-shrink-0 w-4 h-4 mt-0.5 text-learnwise-600" />
-                        <span className="ml-2">Full lifetime access</span>
-                      </div>
-                      <div className="flex">
-                        <Check className="flex-shrink-0 w-4 h-4 mt-0.5 text-learnwise-600" />
-                        <span className="ml-2">Certificate of completion</span>
-                      </div>
-                    </div>
                   </CardContent>
                 </Card>
-              </div>
+              ))}
             </div>
           </div>
         </div>
