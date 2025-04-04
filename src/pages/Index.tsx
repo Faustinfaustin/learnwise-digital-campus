@@ -6,6 +6,9 @@ import FeaturedCourses from "@/components/home/FeaturedCourses";
 import CategorySection from "@/components/home/CategorySection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CTASection from "@/components/home/CTASection";
+import AboutSection from "@/components/home/AboutSection";
+import ContactSection from "@/components/home/ContactSection";
+import ForumPreview from "@/components/home/ForumPreview";
 
 const Index = () => {
   return (
@@ -13,7 +16,10 @@ const Index = () => {
       <HeroSection />
       <FeaturedCourses />
       <CategorySection />
+      <AboutSection />
       <TestimonialsSection />
+      <ForumPreview />
+      <ContactSection />
       <CTASection />
     </Layout>
   );
