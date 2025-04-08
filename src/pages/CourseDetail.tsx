@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
@@ -14,8 +15,11 @@ const CourseDetail = () => {
 
   // Dummy course data
   const course = {
-    id: "1",
-    title: "Complete Ethical Hacking Bootcamp 2023",
+    id: id || "1",
+    title: id === "2" ? "Machine Learning: From Basics to Advanced" : 
+           id === "3" ? "Data Analysis Masterclass with Python" : 
+           id === "4" ? "Network Defense & Security Architecture" : 
+           "Complete Ethical Hacking Bootcamp 2023",
     instructor: "Dr. Alex Johnson",
     rating: 4.8,
     ratingCount: 1243,
@@ -41,6 +45,10 @@ const CourseDetail = () => {
       "Learn ethical hacking from scratch and become a certified professional. This course covers the latest tools and techniques used by ethical hackers in 2023.",
     instructorImage: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     students: 5478,
+    price: id === "2" ? 59.99 : 
+           id === "3" ? 39.99 : 
+           id === "4" ? 99.99 : 
+           49.99,
   };
 
   if (!course) {
@@ -79,7 +87,9 @@ const CourseDetail = () => {
                   </div>
                 </div>
               </div>
-              <Button>Enroll Now</Button>
+              <Button asChild className="bg-learnwise-600 hover:bg-learnwise-700">
+                <Link to={`/enroll/${course.id}`}>Enroll Now - ${course.price}</Link>
+              </Button>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">{course.description}</p>

@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 
 interface CourseCardProps {
@@ -31,8 +32,8 @@ const CourseCard = ({
   level,
 }: CourseCardProps) => {
   return (
-    <Link to={`/course/${id}`}>
-      <Card className="overflow-hidden card-hover">
+    <Card className="overflow-hidden card-hover flex flex-col h-full">
+      <Link to={`/course/${id}`} className="flex-grow">
         <div className="relative h-48">
           <img
             src={image}
@@ -61,26 +62,29 @@ const CourseCard = ({
             <span className="mx-1 text-sm text-gray-400">({ratingCount})</span>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between p-4 pt-0">
-          <div>
-            {discountPrice !== undefined ? (
-              <div className="flex items-center">
-                <span className="text-lg font-bold text-learnwise-700">
-                  ${discountPrice}
-                </span>
-                <span className="ml-2 text-sm text-gray-500 line-through">
-                  ${price}
-                </span>
-              </div>
-            ) : (
+      </Link>
+      <CardFooter className="flex justify-between p-4 pt-0 mt-auto">
+        <div>
+          {discountPrice !== undefined ? (
+            <div className="flex items-center">
               <span className="text-lg font-bold text-learnwise-700">
+                ${discountPrice}
+              </span>
+              <span className="ml-2 text-sm text-gray-500 line-through">
                 ${price}
               </span>
-            )}
-          </div>
-        </CardFooter>
-      </Card>
-    </Link>
+            </div>
+          ) : (
+            <span className="text-lg font-bold text-learnwise-700">
+              ${price}
+            </span>
+          )}
+        </div>
+        <Button asChild size="sm" className="bg-learnwise-600 hover:bg-learnwise-700">
+          <Link to={`/enroll/${id}`}>Enroll</Link>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 
