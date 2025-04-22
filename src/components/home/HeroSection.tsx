@@ -1,8 +1,8 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Laptop } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -10,9 +10,13 @@ const HeroSection = () => {
       <div className="container px-4 mx-auto">
         <div className="grid items-center grid-cols-1 gap-12 md:grid-cols-2">
           <div className="text-center md:text-left">
-            <h1 className="text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+            <div className="flex items-center justify-center md:justify-start mb-4">
+              <Laptop className="w-10 h-10 mr-3 text-teal-400" />
+              <h1 className="text-3xl font-bold text-white">LearnWiseTechnology</h1>
+            </div>
+            <h2 className="text-4xl font-bold text-white md:text-5xl lg:text-6xl">
               Learn Skills for the <span className="text-teal-400">Digital Future</span>
-            </h1>
+            </h2>
             <p className="mt-6 text-lg text-gray-100">
               Master cybersecurity, machine learning, and data analysis with expert-led courses designed for real-world applications.
             </p>

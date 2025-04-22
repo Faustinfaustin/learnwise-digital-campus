@@ -1,6 +1,6 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
+import { Laptop } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -10,8 +10,9 @@ const Footer = () => {
           {/* Logo and description */}
           <div>
             <Link to="/" className="flex items-center">
+              <Laptop className="w-8 h-8 mr-2 text-learnwise-700" />
               <span className="text-2xl font-bold text-learnwise-700">
-                Learn<span className="text-teal-600">Wise</span>
+                LearnWise<span className="text-teal-600">Technology</span>
               </span>
             </Link>
             <p className="mt-4 text-sm text-gray-600">

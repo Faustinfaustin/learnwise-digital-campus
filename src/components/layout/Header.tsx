@@ -1,21 +1,22 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Search, Menu, X } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Laptop } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // This would be controlled by auth context in a real app
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
       <div className="container flex items-center justify-between h-16 px-4 mx-auto">
         {/* Logo */}
         <Link to="/" className="flex items-center">
+          <Laptop className="w-8 h-8 mr-2 text-learnwise-700" />
           <span className="text-2xl font-bold text-learnwise-700">
-            Learn<span className="text-teal-600">Wise</span>
+            LearnWise<span className="text-teal-600">Technology</span>
           </span>
         </Link>
 
